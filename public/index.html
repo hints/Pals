@@ -8,10 +8,12 @@
 
 	<body>
 
+      <div id="fb-root"></div>
+
 <div data-role="page" id="social-login"> 
 	<div  data-role="header"></div> 
 	<div  data-role="content">
-		<a href="#home" data-role="button">Connect with Facebook</a>
+      		<fb:login-button>Login with Facebook</fb:login-button>
 	</div> 
 	<div  data-role="footer"></div> 
 </div> 
@@ -44,6 +46,21 @@
         </div>  
         <div  data-role="footer"></div>
 </div>
+
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({appId: '152878194785952', status: true, cookie: true,
+                 xfbml: true});
+      };
+      (function() {
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.src = document.location.protocol +
+          '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+      }());
+    </script>
 
 	</body>
 </html>
