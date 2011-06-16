@@ -1,19 +1,39 @@
 <html>
 	<head>
-		<link rel="stylesheet"
-		      href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
-		<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+	<link rel="stylesheet"
+	      href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+	<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+
+	<script>
+	$('#login-button').live('click', function() {
+		FB.login(function(response) {
+		  if (response.session) {
+		    if (response.perms) {
+		      // user is logged in and granted some permissions.
+		      // perms is a comma separated list of granted permissions
+		    } else {
+		      // user is logged in, but did not grant any permissions
+		    }
+		  } else {
+		    // user is not logged in.
+		  }
+		}, {perms: 'read_stream,publish_stream,offline_access,' +
+			   'user_location,email,read_friendlists,publish_checkins,' +
+			   'friends_location'}
+		);
+	});
+	</script>
 	</head>
 
 	<body>
-
       <div id="fb-root"></div>
 
 <div data-role="page" id="social-login"> 
 	<div  data-role="header"></div> 
 	<div  data-role="content">
-      		<fb:login-button>Login with Facebook</fb:login-button>
+		<!-- <fb:login-button>Login with Facebook</fb:login-button> -->
+		<a href="#" id='login-button' data-role="button">Login with Facebook</a>
 	</div> 
 	<div  data-role="footer"></div> 
 </div> 
