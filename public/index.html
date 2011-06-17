@@ -7,6 +7,10 @@
 
 	<script>
 	$('#login-button').live('click', function() {
+	     		FB.ui({ method: 'apprequests', 
+       		     		message: 'Invite only your true, real friends..'});
+
+/*
 		FB.login(function(response) {
 		  if (response.session) {
 		    if (response.perms) {
@@ -24,6 +28,8 @@
 			   'user_location,email,publish_checkins,' +
 			   'friends_location'}
 		);
+*/
+
 	});
 	</script>
 	</head>
