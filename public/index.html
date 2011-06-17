@@ -7,17 +7,18 @@
 
 	<script>
 	$('#login-button').live('click', function() {
+/*
 	     		FB.ui({ method: 'apprequests', 
        		     		message: 'Invite only your true, real friends..'});
+*/
 
-/*
 		FB.login(function(response) {
 		  if (response.session) {
 		    if (response.perms) {
 		      // user is logged in and granted some permissions.
 		      // perms is a comma separated list of granted permissions
-	     		FB.ui({ method: 'apprequests', 
-       		     		message: 'Invite only your true, real friends..'});
+	     	//	FB.ui({ method: 'apprequests', 
+       		//     		message: 'Invite only your true, real friends..'});
 		    } else {
 		      // user is logged in, but did not grant any permissions
 		    }
@@ -26,10 +27,8 @@
 		  }
 		}, {perms: 'read_stream,publish_stream,offline_access,' +
 			   'user_location,email,publish_checkins,' +
-			   'friends_location'}
+			   'friends_location,read_friendlists'}
 		);
-*/
-
 	});
 	</script>
 	</head>
