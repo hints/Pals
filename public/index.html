@@ -1,75 +1,79 @@
+<!DOCTYPE html>
 <html>
 	<head>
-	<link rel="stylesheet"
-	      href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
-	<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
 
-	<script>
-/*
-	FB.getLoginStatus(function(response) {
-	  if (response.session) {
-	    // logged in and connected user, someone you know
-	  } else {
-	    // no user session available, someone you dont know
-	  }
-	});
-*/
-
+<script>
 	$('#login-button').live('click', function() {
-/*
-	     		FB.ui({ method: 'apprequests', 
-       		     		message: 'Invite only your true, real friends..'});
-*/
+          FB.getLoginStatus(function(response) {
+            if (response.session) {
+              $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
 
-		FB.login(function(response) {
-		  if (response.session) {
-		    if (response.perms) {
-		      // user is logged in and granted some permissions.
-		      // perms is a comma separated list of granted permissions
-	     	//	FB.ui({ method: 'apprequests', 
-       		//     		message: 'Invite only your true, real friends..'});
-		    } else {
-		      // user is logged in, but did not grant any permissions
-		    }
-		  } else {
-		    // user is not logged in.
-		  }
-		}, {perms: 'read_stream,publish_stream,offline_access,' +
-			   'user_location,email,publish_checkins,' +
-			   'friends_location'}
-		);
+		// Connected. Disconnect.
+		FB.logout(function(response) {
+		  // user is now logged out
+	          $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+		});
+
+            } else {
+		// Not connected. Connect.
+
+                FB.login(function(response) {
+                  if (response.session) {
+                    if (response.perms) {
+                      // user is logged in and granted some permissions.
+                      // perms is a comma separated list of granted permissions
+		      $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
+                    } else {
+	              $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+                    }
+                  } else {
+                    // user is not logged in.
+	            $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+                  }
+                }, {perms: 'read_stream,publish_stream,offline_access,' +
+                           'user_location,email,publish_checkins,' +
+                           'friends_location'}
+                );
+
+            }
+          });
 	});
 	</script>
 	</head>
 
 	<body>
 
-<div data-role="page" id="social"> 
-	<div  data-role="header" data-backbtn="false">
-		<h1>Your Mafia Family</h1>
-	</div> 
 
-	<div  data-role="content">
+<div data-role="page" id="about-me"> 
+	<div data-role="header" data-backbtn="false" data-position="inline">
+		<h1>Your Mafia Family</h1>
+	</div>
+
+	<div data-role="content">
 		<a href="#" id='login-button' data-role="button">Login with Facebook</a>
 	</div> 
 
         <div data-role="footer">
-                <div data-role="navbar">
-                        <ul>
-                        <li><a href="#home">My Favors</a></li>
-                        <li><a href="#social" class="ui-btn-active">My Network</a></li>
-                        </ul>
-                </div><!-- /navbar -->
-        </div><!-- /footer -->
+
+        <div data-role="navbar"><ul>
+          <li><a href="#home">My Favors</a></li>
+          <li><a href="#about-me" class="ui-btn-active ui-state-persist">My Network</a></li>
+        </ul></div>
+
+	</div>
 </div> 
 
 <div data-role="page" id="home">
-        <div data-role="header" data-backbtn="false"> <h1>Your Level: Underboss (50/100)</h1> </div>
+        <div data-role="header" data-backbtn="false" data-position="inline">
+ 	  <h1>Your Level: Underboss (50/100)</h1>
+        </div>
 
         <div data-role="content">
-	<ul data-role="listview" data-theme="g">
-		<li>
+		<ul data-role="listview" data-theme="g">
+			<li>
 			<a href="#home">
 				<h1>Favors</h1>
 				<p>For things to do FOR your friends</p>
@@ -84,17 +88,17 @@
 				<p class='ui-li-count'>0/5</p>
 			</a>
 		</li>
-	</ul>
+		</ul>
         </div>  
 
 	<div data-role="footer">
-		<div data-role="navbar">
-			<ul>
-			<li><a href="#home" class="ui-btn-active">My Favors</a></li>
-			<li><a href="#social">My Network</a></li>
-			</ul>
-		</div><!-- /navbar -->
-	</div><!-- /footer -->
+
+        <div data-role="navbar"><ul>
+          <li><a href="#home" class="ui-btn-active ui-state-persist">My Favors</a></li>
+          <li><a href="#about-me">My Network</a></li>
+        </ul></div>
+
+	</div>
 </div>
 
     <div id="fb-root"></div>
@@ -103,12 +107,21 @@
       window.fbAsyncInit = function() {
         FB.init({appId: '152878194785952', status: true, cookie: true,
                  xfbml: true});
+
+        FB.getLoginStatus(function(response) {
+          if (response.session) {
+	    $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
+          } else {
+	    $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+          }
+        });
+
       };
       (function() {
         var e = document.createElement('script');
         e.type = 'text/javascript';
-        e.src = document.location.protocol +
-          '//connect.facebook.net/en_US/all.js';
+        e.src = 'http://connect.facebook.net/en_US/all.js';
+	// document.location.protocol +
         e.async = true;
         document.getElementById('fb-root').appendChild(e);
       }());
