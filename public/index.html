@@ -6,7 +6,7 @@
 	<script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
 
 	<script>
-
+/*
 	FB.getLoginStatus(function(response) {
 	  if (response.session) {
 	    // logged in and connected user, someone you know
@@ -14,6 +14,7 @@
 	    // no user session available, someone you dont know
 	  }
 	});
+*/
 
 	$('#login-button').live('click', function() {
 /*
@@ -44,12 +45,12 @@
 
 	<body>
 
-      <div id="fb-root"></div>
-
 <div data-role="page" id="social"> 
-	<div  data-role="header"></div> 
+	<div  data-role="header" data-backbtn="false">
+		<h1>Your Mafia Family</h1>
+	</div> 
+
 	<div  data-role="content">
-		<!-- <fb:login-button>Login with Facebook</fb:login-button> -->
 		<a href="#" id='login-button' data-role="button">Login with Facebook</a>
 	</div> 
 
@@ -64,12 +65,9 @@
 </div> 
 
 <div data-role="page" id="home">
-        <div data-role="header">
-		<h1>Underboss (50/100)</h1>
-	</div>
+        <div data-role="header" data-backbtn="false"> <h1>Your Level: Underboss (50/100)</h1> </div>
 
         <div data-role="content">
-
 	<ul data-role="listview" data-theme="g">
 		<li>
 			<a href="#home">
@@ -98,6 +96,8 @@
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 </div>
+
+    <div id="fb-root"></div>
 
     <script>
       window.fbAsyncInit = function() {
