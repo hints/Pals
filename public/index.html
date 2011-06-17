@@ -6,6 +6,15 @@
 	<script src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
 
 	<script>
+
+	FB.getLoginStatus(function(response) {
+	  if (response.session) {
+	    // logged in and connected user, someone you know
+	  } else {
+	    // no user session available, someone you dont know
+	  }
+	});
+
 	$('#login-button').live('click', function() {
 /*
 	     		FB.ui({ method: 'apprequests', 
@@ -27,22 +36,31 @@
 		  }
 		}, {perms: 'read_stream,publish_stream,offline_access,' +
 			   'user_location,email,publish_checkins,' +
-			   'friends_location,read_friendlists'}
+			   'friends_location'}
 		);
 	});
 	</script>
 	</head>
 
 	<body>
+
       <div id="fb-root"></div>
 
-<div data-role="page" id="social-login"> 
+<div data-role="page" id="social"> 
 	<div  data-role="header"></div> 
 	<div  data-role="content">
 		<!-- <fb:login-button>Login with Facebook</fb:login-button> -->
 		<a href="#" id='login-button' data-role="button">Login with Facebook</a>
 	</div> 
-	<div  data-role="footer"></div> 
+
+        <div data-role="footer">
+                <div data-role="navbar">
+                        <ul>
+                        <li><a href="#home">My Favors</a></li>
+                        <li><a href="#social" class="ui-btn-active">My Network</a></li>
+                        </ul>
+                </div><!-- /navbar -->
+        </div><!-- /footer -->
 </div> 
 
 <div data-role="page" id="home">
@@ -69,9 +87,16 @@
 			</a>
 		</li>
 	</ul>
-
         </div>  
-        <div  data-role="footer"></div>
+
+	<div data-role="footer">
+		<div data-role="navbar">
+			<ul>
+			<li><a href="#home" class="ui-btn-active">My Favors</a></li>
+			<li><a href="#social">My Network</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->
 </div>
 
     <script>
@@ -89,6 +114,7 @@
       }());
     </script>
 
-	</body>
+</body>
+
 </html>
 
