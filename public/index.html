@@ -15,7 +15,7 @@
            return tmp.get(0);
         }
 
-	$('#get-requests').live('click', function(){
+	$('#get-requests').live('touchstart', function(){
 		$.get('/favors/favors',
 		   {giver: EMAIL},
 		   function(favors) {
@@ -123,9 +123,12 @@
 	<form method="post" action="/favors/create_favor">
 	    <input id='create-favors-taker' type="hidden" name="takers"
 		   value='' />
-	    <input type="text" name="givers" value="Email address of Favor Giver"  />
-	    <input type="text" name="description" value="Description of Favor"  />
-	    <input type="search" name="places" value="Place (Optional)" />
+	    <input type="text" id='givers-form' name="givers"
+		   value="Email of Godfather to get favor from"  />
+	    <input type="text" id='description-form' name="description"
+		   value="Description of Favor"  />
+	    <input type="search" id='places-form' name="places"
+		   value="Place (Optional)" />
 		<br/>
 	    <input type="submit" data-role="button"
 		   data-inline="true" value="Ask" />
@@ -181,7 +184,7 @@
           }
         });
 
-        $('#login-button,#signup-button').live('click', function() {
+        $('#login-button,#signup-button').live('touchstart', function() {
 	  var button = $(this);
           FB.getLoginStatus(function(response) {
             if (response.session) {
@@ -227,6 +230,12 @@
         e.async = true;
         document.getElementById('fb-root').appendChild(e);
       }());
+
+      $('#givers-form,#description-form,#places-form').live('click',
+	function() {
+	  $(this).val('');
+        }
+       );
     </script>
 
 </body>
