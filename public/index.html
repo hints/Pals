@@ -19,7 +19,8 @@
 		$.get('/favors/favors',
 		   {giver: EMAIL},
 		   function(data) {
-			var favors = eval('(' + data + ')');	
+			console.log('data: ' + data['favors'].length);
+			var favors = eval('(' + data + ')');
 			var content = $('#requests').find(
 				'[data-role|="content"]');
 			content.empty();
