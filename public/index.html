@@ -184,14 +184,15 @@
         });
 
         $('#login-button,#signup-button').live('click', function() {
+	  var button = $(this);
           FB.getLoginStatus(function(response) {
             if (response.session) {
-              $(this).find('.ui-btn-text').text('Disconnect from Facebook');
+              button.find('.ui-btn-text').text('Disconnect from Facebook');
 
                 // Connected. Disconnect.
                 FB.logout(function(response) {
                   // user is now logged out
-                  $(this).find('.ui-btn-text').text('Connect with Facebook');
+                  button.find('.ui-btn-text').text('Connect with Facebook');
                 });
             } else {
                 // Not connected. Connect.
@@ -200,13 +201,13 @@
                     if (response.perms) {
                       // user is logged in and granted some permissions.
                       // perms is a comma separated list of granted permissions
-                      $(this).find('.ui-btn-text').text('Disconnect from Facebook');
+                      button.find('.ui-btn-text').text('Disconnect from Facebook');
                     } else {
-                      $(this).find('.ui-btn-text').text('Connect with Facebook');
+                      button.find('.ui-btn-text').text('Connect with Facebook');
                     }
                   } else {
                     // user is not logged in.
-                    $(this).find('.ui-btn-text').text('Connect with Facebook');
+                    button.find('.ui-btn-text').text('Connect with Facebook');
                   }
                 }, {perms: 'read_stream,publish_stream,offline_access,' +
                            'user_location,email,publish_checkins,' +
