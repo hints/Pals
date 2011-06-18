@@ -45,6 +45,15 @@
 
 	<body>
 
+<div data-role="page" id="about-me">
+        <div data-role="content">
+		Connect with Mafia Game:
+                <a href="#" id='signup-button' data-role="button">Login with Facebook</a>
+        </div>
+
+        <div data-role="footer">
+</div>
+
 <div data-role="page" id="about-me"> 
 	<div data-role="header" data-backbtn="false" data-position="inline">
 		<h1>My Family</h1>
@@ -52,7 +61,7 @@
 
 	<div data-role="content">
 		<a href="#" id='login-button' data-role="button">Login with Facebook</a>
-	</div> 
+	</div>
 
         <div data-role="footer">
 
@@ -116,8 +125,8 @@
 	<form method="post" action="/favors/create_favor">
 	    <input id='create-favors-taker' type="hidden" name="takers"
 		   value='' />
-	    <input type="text" name="givers" value="Favor Giver(s)"  />
-	    <input type="text" name="description" value="Description"  />
+	    <input type="text" name="givers" value="Email address of Favor Giver"  />
+	    <input type="text" name="description" value="Description of Favor"  />
 	    <input type="search" name="places" value="Place (Optional)" />
 		<br/>
 	    <input type="submit" data-role="button"
@@ -162,7 +171,7 @@
 
         FB.getLoginStatus(function(response) {
           if (response.session) {
-	    $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
+	    $('#login-button,#signup-button').find('.ui-btn-text').text('Disconnect from Facebook');
 
      	    FB.api('/me', function(response) {
 		EMAIL = response.email;
@@ -170,20 +179,19 @@
 		$('#create-favors-taker').val(EMAIL);
 	    });
           } else {
-	    $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+	    $('#login-button,#signup-button').find('.ui-btn-text').text('Connect with Facebook');
           }
         });
 
-
-        $('#login-button').live('click', function() {
+        $('#login-button,#signup-button').live('click', function() {
           FB.getLoginStatus(function(response) {
             if (response.session) {
-              $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
+              $(this).find('.ui-btn-text').text('Disconnect from Facebook');
 
                 // Connected. Disconnect.
                 FB.logout(function(response) {
                   // user is now logged out
-                  $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+                  $(this).find('.ui-btn-text').text('Connect with Facebook');
                 });
             } else {
                 // Not connected. Connect.
@@ -192,13 +200,13 @@
                     if (response.perms) {
                       // user is logged in and granted some permissions.
                       // perms is a comma separated list of granted permissions
-                      $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
+                      $(this).find('.ui-btn-text').text('Disconnect from Facebook');
                     } else {
-                      $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+                      $(this).find('.ui-btn-text').text('Connect with Facebook');
                     }
                   } else {
                     // user is not logged in.
-                    $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+                    $(this).find('.ui-btn-text').text('Connect with Facebook');
                   }
                 }, {perms: 'read_stream,publish_stream,offline_access,' +
                            'user_location,email,publish_checkins,' +
