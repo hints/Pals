@@ -6,6 +6,15 @@ class FavorsController < ApplicationController
 		desc = params['description']
 		place = params['place']
 
+		if givers.eql? 'Email of Godfather to get favor from':
+		  givers = ''
+
+		if desc.eql? 'Description of Favor':
+		  desc = ''
+
+		if place.eql? 'Place (Optional)':
+		  place = ''
+
 		f = Favors.new(:takers => takers,
 			       :givers => givers,
 			       :description => desc,
