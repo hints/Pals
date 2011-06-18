@@ -28,9 +28,10 @@
                         listview.attr('data-role', 'listview');
 
 			for(var i = 0; i < favors.length; i++) {
+		            var f = favors[i].favors;
                             var li = $('<li></li>');
-                            li.append('<h3>' + favors.description + '</h3>');
-			    li.append('<p>Requested by: ' + favors.takers + '</p>');
+                            li.append('<h3>' + f.description + '</h3>');
+			    li.append('<p>Requested by: ' + f.takers + '</p>');
 			    listview.append(li);
 			}
 
