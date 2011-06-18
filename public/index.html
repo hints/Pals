@@ -15,7 +15,7 @@
            return tmp.get(0);
         }
 
-	$('#get-requests').live('touchstart', function(){
+	$('#get-requests').live('click', function(){
 		$.get('/favors/favors',
 		   {giver: EMAIL},
 		   function(favors) {
@@ -184,7 +184,7 @@
           }
         });
 
-        $('#login-button,#signup-button').live('touchstart', function() {
+        $('#login-button,#signup-button').live('click', function() {
 	  var button = $(this);
           FB.getLoginStatus(function(response) {
             if (response.session) {
