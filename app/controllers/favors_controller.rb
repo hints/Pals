@@ -15,7 +15,7 @@ class FavorsController < ApplicationController
 
 	def favors
 		giver = params["giver"]
-		favors = Favors.where("givers LIKE ?", '%' + giver + '%')
+		favors = Favors.where("UPPER(givers) LIKE ?", '%' + giver.upcase + '%')
 		render :json => favors
 	end
 
