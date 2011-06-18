@@ -20,7 +20,6 @@
 		   {giver: EMAIL},
 		   function(favors) {
 			console.log('data: ' + favors.length);
-			// console.log('data: ' + data[0]['favors'].length);
 			var content = $('#requests').find(
 				'[data-role|="content"]');
 			content.empty();
@@ -30,7 +29,9 @@
 
 			for(var i = 0; i < favors.length; i++) {
                             var li = $('<li></li>');
-                            li.append('<h3>title</h3>');
+                            li.append('<h3>' + favors['description'] + '</h3>');
+			    li.append('<p>Requested by: ' + favors['takers'] + '</p>');
+			    listview.append(li);
 			}
 
 			content.append(jqToHtml(listview));
@@ -142,13 +143,10 @@
         </div>
 
         <div data-role="footer">
-
-        <div data-role="navbar"><ul>
-          <li><a href="#home" class="ui-btn-active ui-state-persist">My Favors</
-a></li>
-          <li><a href="#about-me">Friends Of Ours</a></li>
-        </ul></div>
-
+     	   <div data-role="navbar"><ul>
+       	     <li><a href="#home" class="ui-btn-active ui-state-persist">My Favors</a></li>
+             <li><a href="#about-me">Friends Of Ours</a></li>
+           </ul></div>
         </div>
 </div>
 
