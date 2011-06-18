@@ -76,13 +76,14 @@
 		<li>
                         <a href="#create-favor">
                                 <h1>Ask for a Favor</h1>
+				<p>Cash in on your respect.</p>
                                 <p class='ui-li-count'>0/10</p>                        			</a>
 		</li>
 
 		<li>
 			<a href="#home">
-				<h1>Do a Favor</h1>
-				<p>For things to do FOR your friends</p>
+				<h1>Favors request by other Godfathers</h1>
+				<p>Do a favor to earn respect.</p>
 				<p class='ui-li-count'>0/10</p>
 			</a>
 		</li>
@@ -90,7 +91,7 @@
                 <li>
                         <a href="#home">
                                 <h1>The Books</h1>
-                                <p>Favors you've done before.</p>
+                                <p>The biography of your legacy.</p>
                                 <p class='ui-li-count'>10</p>
                         </a>
                 </li>
@@ -102,7 +103,7 @@
 
         <div data-role="navbar"><ul>
           <li><a href="#home" class="ui-btn-active ui-state-persist">My Favors</a></li>
-          <li><a href="#about-me">My Family</a></li>
+          <li><a href="#about-me">Friends Of Ours</a></li>
         </ul></div>
 
 	</div>
@@ -114,19 +115,26 @@
 	</div>
 
 	<div data-role="content">
-		<div data-role="fieldcontain">
-		    <input type="text" name="name" id="name" value="Favor Giver(s)"  />
-
-		    <textarea cols="40" rows="8" name="textarea" id="textarea">Favor Description</textarea>
-		    <input type="search" name="places" value="Nearby Places (Optional)" />
-
+	<form method="post" action="/favors/create_favor">
+	    <input type="hidden" name="takers" value="Favor Giver(s)"  />
+	    <input type="text" name="givers" value="Favor Giver(s)"  />
+	    <input type="text" name="description" value="Description"  />
+	    <input type="search" name="places" value="Place (Optional)" />
 		<br/>
-
-		    <a href="#" data-role="button" data-inline="true">Ask</a>
-		</div>
+	    <input type="submit" data-role="button"
+		   data-inline="true" value="Ask" />
+	</form>
 	</div>
 
-        <div data-role="footer"></div>
+        <div data-role="footer">
+
+        <div data-role="navbar"><ul>
+          <li><a href="#home" class="ui-btn-active ui-state-persist">My Favors</a></li>
+          <li><a href="#about-me">My Family</a></li>
+        </ul></div>
+
+        </div>
+
 </div>
 
     <div id="fb-root"></div>

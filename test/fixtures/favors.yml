@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  takers: MyString
+  givers: MyString
+  description: MyString
+  place: MyString
+  when: 2011-06-17 16:04:52
+
+two:
+  takers: MyString
+  givers: MyString
+  description: MyString
+  place: MyString
+  when: 2011-06-17 16:04:52
