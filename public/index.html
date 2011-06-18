@@ -161,7 +161,6 @@
 </div>
 
 
-
     <div id="fb-root"></div>
 
     <script>
@@ -171,6 +170,7 @@
 
         FB.getLoginStatus(function(response) {
           if (response.session) {
+            $.mobile.changePage('#home');
 	    $('#login-button,#signup-button').find('.ui-btn-text').text('Disconnect from Facebook');
 
      	    FB.api('/me', function(response) {
@@ -187,6 +187,7 @@
 	  var button = $(this);
           FB.getLoginStatus(function(response) {
             if (response.session) {
+              $.mobile.changePage('#home');
               button.find('.ui-btn-text').text('Disconnect from Facebook');
 
                 // Connected. Disconnect.
@@ -199,6 +200,7 @@
                 FB.login(function(response) {
                   if (response.session) {
                     if (response.perms) {
+                      $.mobile.changePage('#home');
                       // user is logged in and granted some permissions.
                       // perms is a comma separated list of granted permissions
                       button.find('.ui-btn-text').text('Disconnect from Facebook');
