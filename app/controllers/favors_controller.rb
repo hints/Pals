@@ -13,6 +13,12 @@ class FavorsController < ApplicationController
 		f.save!
 	end
 
+	def favors
+		giver = params["giver"]
+		favors = Favors.where("givers LIKE ?", '%' + giver + '%')
+		render :json => favors
+	end
+
 	def all_favors
 		@favors = Favors.find(:all)
 	end

@@ -7,6 +7,8 @@
 <script type="text/javascript" src="http://cdn.simplegeo.com/js/1.3/simplegeo.places.jq.min.js"></script>
 
 <script>
+	var EMAIL = '';
+
 	$('#login-button').live('click', function() {
           FB.getLoginStatus(function(response) {
             if (response.session) {
@@ -41,6 +43,34 @@
 
             }
           });
+	});
+
+        function jqToHtml(jqObj) {
+           var tmp = $('<div></div>');
+           tmp.append(jqObj).page();
+           return tmp.get(0);
+        }
+
+	$('#get-requests').live('click', function(){
+		jQuery.get('/favors/favors',
+		   {giver: EMAIL},
+		   success: function(data) {
+			var favors = eval('(' + data + ')');	
+			var content = $('#requests').find(
+				'[data-role|="content"]');
+			content.empty();
+
+                        var listview = $('<ul></ul>');
+                        listview.attr('data-role', 'listview');
+
+			for(var i = 0; i < favors.length; i++) {
+                            var li = $('<li></li>');
+                            li.append('<h3>title</h3>');
+			}
+
+			content.append(jqToHtml(listview);
+		   }
+		);
 	});
 	</script>
 	</head>
@@ -81,21 +111,20 @@
 		</li>
 
 		<li>
-			<a href="#home">
-				<h1>Favors request by other Godfathers</h1>
+			<a href="#" id="get-requests">
+				<h1>Favors requested by other Godfathers</h1>
 				<p>Do a favor to earn respect.</p>
 				<p class='ui-li-count'>0/10</p>
 			</a>
 		</li>
 
                 <li>
-                        <a href="#home">
+                        <a href="#">
                                 <h1>The Books</h1>
                                 <p>The biography of your legacy.</p>
                                 <p class='ui-li-count'>10</p>
                         </a>
                 </li>
-
 		</ul>
         </div>
 
@@ -110,13 +139,15 @@
 </div>
 
 <div data-role="page" id="create-favor">
-        <div data-role="header" data-backbtn="false" data-position="inline">
+        <div data-role="header" data-backbtn="true" data-position="inline">
 		<h1>Ask for a Favor</h1>
 	</div>
 
 	<div data-role="content">
-	<form method="post" action="/favors/create_favor">
-	    <input type="hidden" name="takers" value="Favor Giver(s)"  />
+
+	<form method="post" action="/favors/create_favor"
+		 id='create-favors-taker'>
+	    <input type="hidden" name="takers" value="Favor Giver Email(s)"  />
 	    <input type="text" name="givers" value="Favor Giver(s)"  />
 	    <input type="text" name="description" value="Description"  />
 	    <input type="search" name="places" value="Place (Optional)" />
@@ -124,6 +155,7 @@
 	    <input type="submit" data-role="button"
 		   data-inline="true" value="Ask" />
 	</form>
+
 	</div>
 
         <div data-role="footer">
@@ -132,10 +164,29 @@
           <li><a href="#home" class="ui-btn-active ui-state-persist">My Favors</a></li>
           <li><a href="#about-me">My Family</a></li>
         </ul></div>
+        </div>
+</div>
 
+<div data-role="page" id="requests">
+        <div data-role="header" data-backbtn="false" data-position="inline">
+          <h1>Your Level: Underboss (50/100)</h1>
         </div>
 
+        <div data-role="content">
+        </div>
+
+        <div data-role="footer">
+
+        <div data-role="navbar"><ul>
+          <li><a href="#home" class="ui-btn-active ui-state-persist">My Favors</
+a></li>
+          <li><a href="#about-me">Friends Of Ours</a></li>
+        </ul></div>
+
+        </div>
 </div>
+
+
 
     <div id="fb-root"></div>
 
@@ -147,6 +198,13 @@
         FB.getLoginStatus(function(response) {
           if (response.session) {
 	    $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
+
+     	    FB.api('/me', function(response) {
+		EMAIL = response.email;
+		console.log('email: ' + EMAIL);
+		$('#create-favors-taker').val(EMAIL);
+	    });
+
           } else {
 	    $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
           }
