@@ -16,9 +16,9 @@
         }
 
 	$('#get-requests').live('click', function(){
-		jQuery.get('/favors/favors',
+		$.get('/favors/favors',
 		   {giver: EMAIL},
-		   success: function(data) {
+		   function(data) {
 			var favors = eval('(' + data + ')');	
 			var content = $('#requests').find(
 				'[data-role|="content"]');
@@ -32,7 +32,7 @@
                             li.append('<h3>title</h3>');
 			}
 
-			content.append(jqToHtml(listview);
+			content.append(jqToHtml(listview));
 		   }
 		);
 	});
@@ -168,12 +168,10 @@ a></li>
 		console.log('email: ' + EMAIL);
 		$('#create-favors-taker').val(EMAIL);
 	    });
-
           } else {
 	    $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
           }
         });
-
 
 
         $('#login-button').live('click', function() {
@@ -186,10 +184,8 @@ a></li>
                   // user is now logged out
                   $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
                 });
-
             } else {
                 // Not connected. Connect.
-
                 FB.login(function(response) {
                   if (response.session) {
                     if (response.perms) {
@@ -207,7 +203,6 @@ a></li>
                            'user_location,email,publish_checkins,' +
                            'friends_location'}
                 );
-
             }
           });
         });
