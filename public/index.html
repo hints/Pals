@@ -145,9 +145,9 @@
 
 	<div data-role="content">
 
-	<form method="post" action="/favors/create_favor"
-		 id='create-favors-taker'>
-	    <input type="hidden" name="takers" value="Favor Giver Email(s)"  />
+	<form method="post" action="/favors/create_favor">
+	    <input id='create-favors-taker' type="hidden" name="takers"
+		   value='' />
 	    <input type="text" name="givers" value="Favor Giver(s)"  />
 	    <input type="text" name="description" value="Description"  />
 	    <input type="search" name="places" value="Place (Optional)" />
