@@ -18,10 +18,9 @@
 	$('#get-requests').live('click', function(){
 		$.get('/favors/favors',
 		   {giver: EMAIL},
-		   function(data) {
-			console.log('data: ' + data.length);
-			console.log('data: ' + data[0]['favors'].length);
-			var favors = eval('(' + data + ')');
+		   function(favors) {
+			console.log('data: ' + favors.length);
+			// console.log('data: ' + data[0]['favors'].length);
 			var content = $('#requests').find(
 				'[data-role|="content"]');
 			content.empty();
