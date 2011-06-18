@@ -9,42 +9,6 @@
 <script>
 	var EMAIL = '';
 
-	$('#login-button').live('click', function() {
-          FB.getLoginStatus(function(response) {
-            if (response.session) {
-              $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
-
-		// Connected. Disconnect.
-		FB.logout(function(response) {
-		  // user is now logged out
-	          $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
-		});
-
-            } else {
-		// Not connected. Connect.
-
-                FB.login(function(response) {
-                  if (response.session) {
-                    if (response.perms) {
-                      // user is logged in and granted some permissions.
-                      // perms is a comma separated list of granted permissions
-		      $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
-                    } else {
-	              $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
-                    }
-                  } else {
-                    // user is not logged in.
-	            $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
-                  }
-                }, {perms: 'read_stream,publish_stream,offline_access,' +
-                           'user_location,email,publish_checkins,' +
-                           'friends_location'}
-                );
-
-            }
-          });
-	});
-
         function jqToHtml(jqObj) {
            var tmp = $('<div></div>');
            tmp.append(jqObj).page();
@@ -209,6 +173,45 @@ a></li>
 	    $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
           }
         });
+
+
+
+        $('#login-button').live('click', function() {
+          FB.getLoginStatus(function(response) {
+            if (response.session) {
+              $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
+
+                // Connected. Disconnect.
+                FB.logout(function(response) {
+                  // user is now logged out
+                  $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+                });
+
+            } else {
+                // Not connected. Connect.
+
+                FB.login(function(response) {
+                  if (response.session) {
+                    if (response.perms) {
+                      // user is logged in and granted some permissions.
+                      // perms is a comma separated list of granted permissions
+                      $('#login-button').find('.ui-btn-text').text('Disconnect from Facebook');
+                    } else {
+                      $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+                    }
+                  } else {
+                    // user is not logged in.
+                    $('#login-button').find('.ui-btn-text').text('Connect with Facebook');
+                  }
+                }, {perms: 'read_stream,publish_stream,offline_access,' +
+                           'user_location,email,publish_checkins,' +
+                           'friends_location'}
+                );
+
+            }
+          });
+        });
+
 
       };
       (function() {
