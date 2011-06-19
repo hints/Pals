@@ -15,7 +15,7 @@
            return tmp.get(0);
         }
 
-	$('#get-requests').live('tap click', function(){
+	$('#get-requests').live('tap', function(){
 		$.get('/favors/favors',
 		   {giver: EMAIL},
 		   function(favors) {
@@ -204,7 +204,7 @@
           }
         });
 
-        $('#login-button,#signup-button').live('tap click', function() {
+        $('#login-button,#signup-button').live('tap', function() {
 	  var button = $(this);
           FB.getLoginStatus(function(response) {
             if (response.session) {
@@ -256,7 +256,7 @@
         document.getElementById('fb-root').appendChild(e);
       }());
 
-      $('#givers-form,#description-form,#places-form').live('tap click',
+      $('#givers-form,#description-form,#places-form').live('tap',
 	function() {
 	  if ($(this).val() == $(this).attr('data-default')) {
 	    $(this).val('');
