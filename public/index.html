@@ -205,6 +205,7 @@
                 FB.logout(function(response) {
                   // user is now logged out
                   button.find('.ui-btn-text').text('Connect with Facebook');
+                  $.mobile.changePage('#signup-page');
                 });
             } else {
                 // Not connected. Connect.
@@ -218,10 +219,12 @@
                       button.find('.ui-btn-text').text('Disconnect from Facebook');
                     } else {
                       button.find('.ui-btn-text').text('Connect with Facebook');
+                      $.mobile.changePage('#signup-page');
                     }
                   } else {
                     // user is not logged in.
                     button.find('.ui-btn-text').text('Connect with Facebook');
+                    $.mobile.changePage('#signup-page');
                   }
                 }, {perms: 'read_stream,publish_stream,offline_access,' +
                            'user_location,email,publish_checkins,' +
