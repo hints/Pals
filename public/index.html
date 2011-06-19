@@ -177,6 +177,8 @@
 
         FB.getLoginStatus(function(response) {
           if (response.session) {
+	    $('#login-button').text('Disconnect from Facebook');
+
 	    $('#login-button,#signup-button').find('.ui-btn-text').text('Disconnect from Facebook');
             $.mobile.changePage('#home');
 
