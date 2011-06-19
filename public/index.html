@@ -177,8 +177,8 @@
 
         FB.getLoginStatus(function(response) {
           if (response.session) {
-            $.mobile.changePage('#home');
 	    $('#login-button,#signup-button').find('.ui-btn-text').text('Disconnect from Facebook');
+            $.mobile.changePage('#home');
 
      	    FB.api('/me', function(response) {
 		EMAIL = response.email;
