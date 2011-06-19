@@ -179,6 +179,14 @@
             });
       }
 
+      function setLoginButtonText(button, text) {
+	if (button.find('.ui-btn-text').length != 0) {
+	  button.find('.ui-btn-text').text(text);
+	} else {
+	  button.text(text);
+	}
+      }
+
       window.fbAsyncInit = function() {
         FB.init({appId: '152878194785952', status: true, cookie: true,
                  xfbml: true});
@@ -186,14 +194,13 @@
         FB.getLoginStatus(function(response) {
           if (response.session) {
             $.mobile.changePage('#home');
-	    $('#login-button').text('Disconnect from Facebook');
-	    $('#login-button,#signup-button').find('.ui-btn-text').text('Disconnect from Facebook');
-
+	    setLoginButtonText($('#login-button'), 'Disconnect from Facebook');
+	    setLoginButtonText($('#signup-button'), 'Disconnect from Facebook');
    	    initEnv();
 
           } else {
-	    $('#login-button').text('Connect with Facebook');
-	    $('#login-button,#signup-button').find('.ui-btn-text').text('Connect with Facebook');
+	    setLoginButtonText($('#login-button'), 'Connect with Facebook');
+	    setLoginButtonText($('#signup-button'), 'Connect with Facebook');
           }
         });
 
@@ -204,7 +211,8 @@
                 // Connected. Disconnect.
                 FB.logout(function(response) {
                   // user is now logged out
-                  button.find('.ui-btn-text').text('Connect with Facebook');
+	      	  setLoginButtonText($('#login-button'), 'Connect with Facebook');
+	    	  setLoginButtonText($('#signup-button'), 'Connect with Facebook');
                   $.mobile.changePage('#signup-page');
                 });
             } else {
@@ -216,14 +224,17 @@
                       $.mobile.changePage('#home');
                       // user is logged in and granted some permissions.
                       // perms is a comma separated list of granted permissions
-                      button.find('.ui-btn-text').text('Disconnect from Facebook');
+	      	      setLoginButtonText($('#login-button'), 'Disconnect from Facebook');
+	    	      setLoginButtonText($('#signup-button'), 'Disconnect from Facebook');
                     } else {
-                      button.find('.ui-btn-text').text('Connect with Facebook');
+	      	      setLoginButtonText($('#login-button'), 'Connect with Facebook');
+	    	      setLoginButtonText($('#signup-button'), 'Connect with Facebook');
                       $.mobile.changePage('#signup-page');
                     }
                   } else {
                     // user is not logged in.
-                    button.find('.ui-btn-text').text('Connect with Facebook');
+	      	    setLoginButtonText($('#login-button'), 'Connect with Facebook');
+	    	    setLoginButtonText($('#signup-button'), 'Connect with Facebook');
                     $.mobile.changePage('#signup-page');
                   }
                 }, {perms: 'read_stream,publish_stream,offline_access,' +
