@@ -127,10 +127,13 @@
 	    <input id='create-favors-taker' type="hidden" name="takers"
 		   value='' />
 	    <input type="text" id='givers-form' name="givers"
+		   data-default='Email of Godfather to get favor from'
 		   value="Email of Godfather to get favor from"  />
 	    <input type="text" id='description-form' name="description"
+		   data-default='Description of Favor'
 		   value="Description of Favor"  />
 	    <input type="search" id='places-form' name="places"
+		   data-default='Place (Optional)'
 		   value="Place (Optional)" />
 		<br/>
 	    <input type="submit" data-role="button"
@@ -236,7 +239,9 @@
 
       $('#givers-form,#description-form,#places-form').live('click',
 	function() {
-	  $(this).val('');
+	  if ($(this).val() == $(this).attr('data-default')) {
+	    $(this).val('');
+	  }
         }
        );
     </script>
