@@ -15,7 +15,7 @@
            return tmp.get(0);
         }
 
-	$('#get-requests').live('tap', function(){
+	$('#get-requests').live('tap', function(event){
 		$.get('/favors/favors',
 		   {giver: EMAIL},
 		   function(favors) {
@@ -204,7 +204,7 @@
           }
         });
 
-        $('#login-button,#signup-button').live('tap', function() {
+        $('#login-button,#signup-button').live('tap', function(event) {
 	  var button = $(this);
           FB.getLoginStatus(function(response) {
             if (response.session) {
@@ -257,7 +257,7 @@
       }());
 
       $('#givers-form,#description-form,#places-form').live('tap',
-	function() {
+	function(event) {
 	  if ($(this).val() == $(this).attr('data-default')) {
 	    $(this).val('');
 	  }
