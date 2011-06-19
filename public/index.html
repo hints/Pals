@@ -171,6 +171,14 @@
     <div id="fb-root"></div>
 
     <script>
+      function initEnv() {
+            FB.api('/me', function(response) {
+                EMAIL = response.email;
+                console.log('email: ' + EMAIL);
+                $('#create-favors-taker').val(EMAIL);
+            });
+      }
+
       window.fbAsyncInit = function() {
         FB.init({appId: '152878194785952', status: true, cookie: true,
                  xfbml: true});
@@ -181,11 +189,8 @@
 	    $('#login-button').text('Disconnect from Facebook');
 	    $('#login-button,#signup-button').find('.ui-btn-text').text('Disconnect from Facebook');
 
-     	    FB.api('/me', function(response) {
-		EMAIL = response.email;
-		console.log('email: ' + EMAIL);
-		$('#create-favors-taker').val(EMAIL);
-	    });
+   	    initEnv();
+
           } else {
 	    $('#login-button').text('Connect with Facebook');
 	    $('#login-button,#signup-button').find('.ui-btn-text').text('Connect with Facebook');
@@ -196,9 +201,6 @@
 	  var button = $(this);
           FB.getLoginStatus(function(response) {
             if (response.session) {
-              $.mobile.changePage('#home');
-              button.find('.ui-btn-text').text('Disconnect from Facebook');
-
                 // Connected. Disconnect.
                 FB.logout(function(response) {
                   // user is now logged out
@@ -209,6 +211,7 @@
                 FB.login(function(response) {
                   if (response.session) {
                     if (response.perms) {
+		      initEnv();
                       $.mobile.changePage('#home');
                       // user is logged in and granted some permissions.
                       // perms is a comma separated list of granted permissions
@@ -247,7 +250,6 @@
         }
        );
     </script>
-
 </body>
 
 </html>
